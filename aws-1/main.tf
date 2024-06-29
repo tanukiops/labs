@@ -7,12 +7,6 @@ resource "aws_key_pair" "tvaneerdewegh" {
   public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9NL4EhmSEhyaKt8fDybkRtvL/g1+hKBqL1Qp5/OOK5peGHAr2VGBvFMLM4FT+F6Q7w7IX0JXFs24smi76vnmFtFdTBZxWivsDpznFVKcQCfq/ZnBL2lEGRlchW/ZLAjWV8XpFMoybWlvaPd18m2n11FYKl0oFdn47j9UIxuofk0cp+0/QiVjrqFRD4shTAAeKH1vHnNCS+KbsBWJNZ9sO0V3l7kKyMlD2K+qfv7SGH0YHcj1+eEG/YAhDInF770yTziXy5HTGgecry+Iyh2Ck4vcLyPnHI8OHTvgFu1Xl3VQxYlaAIXBG1NPb3F6gfOF1dXOadzzt+HDHDKqonOXj tim.vaneerdewegh@uantwerpen.be"
 }
 
-resource "aws_vpc" "default_vpc" {
-  cidr_block = "172.31.0.0/16"
-  lifecycle {
-    prevent_destroy = true
-  }
-}
 
 data "aws_ami" "ubuntu" {
   most_recent = true
@@ -33,7 +27,7 @@ data "aws_ami" "ubuntu" {
 resource "aws_security_group" "allow_ssh" {
   name        = "allow_ssh"
   description = "sg to allow ssh from home"
-  vpc_id      = aws_vpc.default_vpc.id
+  vpc_id      = "vpc-01f763b28bcd3c32e"
   tags = {
     Name = "allow_ssh"
   }
